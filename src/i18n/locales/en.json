@@ -1,0 +1,46 @@
+{
+  "greetings": {
+    "rootLayout": "Root layout! I render on all paths (in English)",
+    "exactPath": "Hello {exactPath} exact path!",
+    "privateLayout": "Hello private layout! I render on all paths inside the /_private/ folder",
+    "publicLayout": "Public layout! I render on all paths inside the /(public)/ folder",
+    "home": "Welcome Home!"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "errors": {
+      "required": "{field} is required",
+      "invalidField": "Please enter a valid {field}.",
+      "minLength": "{field} should contain at least {length} characters"
+    }
+  },
+  "buttons": {
+    "logOut": "Log out"
+  },
+  "home": {
+    "links": {
+      "goToPayments": "Go to payments"
+    }
+  },
+  "payments": {
+    "table": {
+      "columns": {
+        "amount": "Amount",
+        "status": "Status",
+        "email": "Email"
+      }
+    }
+  },
+  "table": {
+    "noResults": "No results",
+    "pagination": {
+      "pageCount": "{currentPage} of {totalPages}",
+      "buttons": {
+        "next": "Next",
+        "previous": "Previous"
+      }
+    }
+  }
+}

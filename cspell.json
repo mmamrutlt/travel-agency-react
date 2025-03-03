@@ -1,0 +1,11 @@
+{
+  "ignorePaths": [
+    "cspell.json",
+    "node_modules/",
+    "**/*.css",
+    "**/pnpm-lock.yaml",
+    "**/locales/es.json",
+    "dist/"
+  ],
+  "words": ["autodocs", "commitlint", "Lngs", "lukemorales", "sonner", "TTFB", "VITE"]
+}

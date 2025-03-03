@@ -1,0 +1,46 @@
+{
+  "greetings": {
+    "rootLayout": "Root layout! Me renderizo en todas las rutas (en español)",
+    "exactPath": "Hola {exactPath} ruta exacta!",
+    "privateLayout": "Hola layout privado! Me renderizo en todas las rutas dentro de la carpeta /_private/",
+    "publicLayout": "Layout público! Me renderizo en todas las rutas dentro de la carpeta /(public)/",
+    "home": "Bienvenido al home!"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Contraseña",
+    "submit": "Enviar",
+    "errors": {
+      "required": "{field} es requerido",
+      "invalidField": "Por favor ingresar un/a {field} válido/a",
+      "minLength": "{field} debe contener al menos {length} caracteres"
+    }
+  },
+  "buttons": {
+    "logOut": "Cerrar sesión"
+  },
+  "home": {
+    "links": {
+      "goToPayments": "Ir a pagos"
+    }
+  },
+  "payments": {
+    "table": {
+      "columns": {
+        "amount": "Cantidad",
+        "status": "Estado",
+        "email": "Email"
+      }
+    }
+  },
+  "table": {
+    "noResults": "Sin resultados",
+    "pagination": {
+      "pageCount": "{currentPage} de {totalPages}",
+      "buttons": {
+        "next": "Siguiente",
+        "previous": "Anterior"
+      }
+    }
+  }
+}
