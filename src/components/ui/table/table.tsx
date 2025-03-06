@@ -1,10 +1,12 @@
 import type { ComponentProps } from 'react';
 import {
   createColumnHelper,
+  flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   type OnChangeFn,
   type PaginationState,
+  type Table as TableProps,
   type TableOptions,
   useReactTable,
 } from '@tanstack/react-table';
@@ -12,6 +14,7 @@ import { tv } from 'tailwind-variants';
 
 const tableVariants = tv({
   slots: {
+    wrapper: 'relative w-full overflow-x-auto rounded-md border',
     root: 'w-full caption-bottom text-sm',
     header: '[&_tr]:border-b',
     body: '[&_tr:last-child]:border-0',
@@ -24,11 +27,11 @@ const tableVariants = tv({
   },
 });
 
-const { body, caption, cell, footer, head, header, root, row, skeleton } = tableVariants();
+const { body, caption, cell, footer, head, header, root, row, skeleton, wrapper } = tableVariants();
 
 const Root = ({ className, ...props }: ComponentProps<'table'>) => {
   return (
-    <div className="relative w-full overflow-x-auto" data-slot="table-container">
+    <div className={wrapper()} data-slot="table-container">
       <table className={root({ className })} data-slot="table" {...props} />
     </div>
   );
@@ -68,7 +71,7 @@ const Skeleton = ({ columnsLength, pageSize }: { columnsLength: number; pageSize
       <Row key={index}>
         {Array.from({ length: columnsLength }, (_, idx) => {
           return (
-            <Cell className="h-9" key={idx}>
+            <Cell className="h-12" key={idx}>
               <div className={skeleton()} />
             </Cell>
           );
@@ -98,4 +101,4 @@ export const useTable = <T,>({ columns, data, ...props }: UseTableProps<T>) => {
 
 export const Table = { Body, Caption, Cell, Footer, Head, Header, Root, Row, Skeleton };
 
-export { createColumnHelper, type OnChangeFn, type PaginationState };
+export { createColumnHelper, flexRender, type OnChangeFn, type PaginationState, type TableProps };

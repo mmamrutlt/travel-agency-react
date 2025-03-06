@@ -1,12 +1,12 @@
 import { createRouter } from '@tanstack/react-router';
 
-// Import the generated route tree
+import type { FileRouteTypes } from '../routeTree.gen';
 import { routeTree } from '../routeTree.gen';
 
-// Create a new router instance
 export const router = createRouter({ routeTree });
 
-// Register the router instance for type safety
+export type AvailableRoutes = FileRouteTypes['id'];
+
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;

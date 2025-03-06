@@ -8,9 +8,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type AuthStoreState = {
+export interface AuthStoreState {
   token: string | null;
-};
+}
 
 const useAuthStore = create<AuthStoreState>()(
   persist(

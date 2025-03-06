@@ -1,35 +1,67 @@
-import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
+import { z } from 'zod';
 
-import { DataTable, type PaginationState } from '@/components/ui/table';
+import { DataTable } from '@/components/ui/table';
+import {
+  paginationValidationWithDefaults,
+  searchTextValidation,
+  useDebounce,
+  usePagination,
+  useSearchText,
+} from '@/hooks';
+import { useTranslation } from '@/i18n';
 import { usePaymentsListQuery } from '@/services';
 import { usePaymentsTable } from './-hooks';
 
-const PAGE_SIZE = 10;
-
 const PaymentsPage = () => {
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: PAGE_SIZE,
-  });
+  const {
+    actions: { changePage },
+    page,
+    pageIndex,
+    pageSize,
+  } = usePagination(Route.id);
+  const { searchText } = useSearchText(Route.id);
+
+  const debouncedSearchText = useDebounce(searchText, 500);
+
+  const { t } = useTranslation();
 
   const { data, isLoading } = usePaymentsListQuery({
-    pageSize: pagination.pageSize,
-    page: pagination.pageIndex + 1,
+    pageSize,
+    page,
+    searchText: debouncedSearchText,
   });
 
   const table = usePaymentsTable({
     data: data?.data ?? [],
-    state: { pagination },
-    onPaginationChange: setPagination,
+    state: { pagination: { pageIndex, pageSize } },
+    onPaginationChange: (updater) => {
+      if (typeof updater === 'function') {
+        changePage(updater({ pageIndex, pageSize }));
+      }
+    },
     pageCount: data?.pagination?.totalPages,
   });
 
   return (
-    <div className="p-4">
-      <DataTable isLoadingData={isLoading} table={table} />
+    <div className="flex flex-col gap-y-2 p-4">
+      <h1>{t('payments.title')}</h1>
+
+      <DataTable
+        isLoading={isLoading}
+        path={Route.id}
+        table={table}
+        withColumnVisibility
+        withSearch
+      />
     </div>
   );
 };
 
-export const Route = createFileRoute('/_private/payments/')({ component: PaymentsPage });
+export const Route = createFileRoute('/_private/payments/')({
+  component: PaymentsPage,
+  validateSearch: z.object({
+    ...searchTextValidation.shape,
+    ...paginationValidationWithDefaults.shape,
+  }),
+});

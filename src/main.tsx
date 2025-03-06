@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
+import { initializeIcons } from '@/components/ui/icons';
 import { Toaster } from '@/components/ui/toast';
 import { queryClient } from '@/config/queryClient';
 import { router } from '@/config/router';
@@ -16,9 +17,8 @@ import '@/styles.css';
 import { env } from './config/env';
 
 initializeSentry();
-scan({
-  enabled: Boolean(env.VITE_APP_ENV === 'local' && env.VITE_ENABLE_REACT_SCAN),
-});
+initializeIcons();
+scan({ enabled: Boolean(env.VITE_APP_ENV === 'local' && env.VITE_ENABLE_REACT_SCAN) });
 
 const rootElement = document.getElementById('root')!;
 

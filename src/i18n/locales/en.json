@@ -25,16 +25,25 @@
     }
   },
   "payments": {
+    "title": "Payments Information",
     "table": {
       "columns": {
         "amount": "Amount",
         "status": "Status",
-        "email": "Email"
+        "email": "Email",
+        "actions": {
+          "title": "Actions",
+          "ariaLabel": "Open menu",
+          "copyPaymentEmail": "Copy payment email"
+        }
       }
     }
   },
   "table": {
     "noResults": "No results",
+    "filters": {
+      "columns": "Columns"
+    },
     "pagination": {
       "pageCount": "{currentPage} of {totalPages}",
       "buttons": {

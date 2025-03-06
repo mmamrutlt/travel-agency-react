@@ -27,6 +27,7 @@ const config: Linter.Config[] = [
       curly: 'warn',
       'no-console': 'warn',
       'no-extra-boolean-cast': 'error',
+      'no-nested-ternary': 'error',
       'no-unneeded-ternary': 'error',
       'object-shorthand': 'warn',
     },
@@ -44,6 +45,7 @@ const config: Linter.Config[] = [
       'react/jsx-sort-props': ['warn', { shorthandLast: true }],
       'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': 'warn',
+      'react/prop-types': 'off',
     },
   },
 

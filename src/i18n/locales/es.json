@@ -25,16 +25,25 @@
     }
   },
   "payments": {
+    "title": "Información de Pagos",
     "table": {
       "columns": {
         "amount": "Cantidad",
         "status": "Estado",
-        "email": "Email"
+        "email": "Email",
+        "actions": {
+          "title": "Acciones",
+          "ariaLabel": "Abrir menú",
+          "copyPaymentEmail": "Copiar email de pago"
+        }
       }
     }
   },
   "table": {
     "noResults": "Sin resultados",
+    "filters": {
+      "columns": "Columnas"
+    },
     "pagination": {
       "pageCount": "{currentPage} de {totalPages}",
       "buttons": {

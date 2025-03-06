@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { HomeIcon } from 'lucide-react';
 
+import { Icons } from '@/components/ui/icons';
 import { Button, type ButtonProps } from './button';
 
 const sizes: ButtonProps['size'][] = ['default', 'icon', 'lg', 'sm'];
@@ -45,7 +45,7 @@ export const All: Story = {
                       <p className="font-medium uppercase">{size}</p>
 
                       <Button {...props} size={size} variant={variant}>
-                        {size === 'icon' ? <HomeIcon size={10} /> : children}
+                        {size === 'icon' ? <Icons.Home /> : children}
                       </Button>
                     </div>
                   </div>
@@ -75,7 +75,7 @@ export const Disabled: Story = {
                       <p className="font-medium uppercase">{size}</p>
 
                       <Button {...props} size={size} variant={variant} disabled>
-                        {size === 'icon' ? <HomeIcon size={10} /> : children}
+                        {size === 'icon' ? <Icons.Home /> : children}
                       </Button>
                     </div>
                   </div>

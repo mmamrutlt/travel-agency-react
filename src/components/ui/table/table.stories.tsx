@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { DataTable } from './data-table';
-import { createColumnHelper, useTable } from './table';
+import { createColumnHelper, flexRender, Table, useTable } from './table';
 
-const meta: Meta<typeof DataTable> = {
-  component: DataTable,
+const meta: Meta<typeof Table.Root> = {
+  component: Table.Root,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   title: 'Components/UI/Table',
-} satisfies Meta<typeof DataTable>;
+} satisfies Meta<typeof Table.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -28,24 +27,6 @@ const MOCK_DATA: Person[] = [
   { firstName: 'Emelia', lastName: 'Cole', age: 31 },
   { firstName: 'Mylene', lastName: 'Kessler', age: 7 },
   { firstName: 'Jeffry', lastName: 'Abshire', age: 24 },
-  { firstName: 'Cade', lastName: 'Hane', age: 11 },
-  { firstName: 'Shyanne', lastName: 'Goyette', age: 27 },
-  { firstName: 'Martine', lastName: 'Lueilwitz', age: 1 },
-  { firstName: 'Kamille', lastName: 'Hackett', age: 27 },
-  { firstName: 'Verlie', lastName: 'Jacobson', age: 14 },
-  { firstName: 'Noelia', lastName: 'Kling', age: 31 },
-  { firstName: 'Raymond', lastName: 'Rau-Langosh', age: 3 },
-  { firstName: 'Athena', lastName: 'Von', age: 14 },
-  { firstName: 'Wilhelmine', lastName: 'Champlin', age: 17 },
-  { firstName: 'Jo', lastName: 'Pacocha', age: 5 },
-  { firstName: 'Jillian', lastName: 'Fahey', age: 22 },
-  { firstName: 'Rita', lastName: 'Crona', age: 38 },
-  { firstName: 'Victor', lastName: 'Cronin', age: 37 },
-  { firstName: 'Christiana', lastName: 'Rodriguez-Bailey', age: 31 },
-  { firstName: 'Lazaro', lastName: 'Senger', age: 5 },
-  { firstName: 'Amari', lastName: 'Glover', age: 18 },
-  { firstName: 'Winona', lastName: 'Wehner', age: 19 },
-  { firstName: 'Rachel', lastName: 'Schumm', age: 10 },
   // cspell: enable
 ];
 
@@ -59,8 +40,52 @@ const columns = [
 
 export const Default: Story = {
   render: () => {
-    const table = useTable({ data: MOCK_DATA.slice(10), columns });
+    const table = useTable({ data: MOCK_DATA, columns });
 
-    return <DataTable table={table} withPagination={false} />;
+    return (
+      <Table.Root>
+        <Table.Header>
+          {table.getHeaderGroups().map((headerGroup) => {
+            return (
+              <Table.Row key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <Table.Head key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
+                    </Table.Head>
+                  );
+                })}
+              </Table.Row>
+            );
+          })}
+        </Table.Header>
+
+        <Table.Body>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => {
+              return (
+                <Table.Row key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <Table.Cell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </Table.Cell>
+                    );
+                  })}
+                </Table.Row>
+              );
+            })
+          ) : (
+            <Table.Row>
+              <Table.Cell className="h-24 text-center" colSpan={table.getAllColumns().length}>
+                No results
+              </Table.Cell>
+            </Table.Row>
+          )}
+        </Table.Body>
+      </Table.Root>
+    );
   },
 };

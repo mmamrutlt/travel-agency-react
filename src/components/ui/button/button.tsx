@@ -41,6 +41,5 @@ const Button = ({ asChild = false, className, size, variant, ...props }: ButtonP
 
   return <Comp className={buttonVariants({ variant, size, className })} {...props} />;
 };
-Button.displayName = 'Button';
 
 export { Button, buttonVariants };

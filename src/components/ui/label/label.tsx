@@ -13,6 +13,5 @@ type LabelProps = ComponentProps<typeof LabelPrimitive.Root> & Styled;
 const Label = ({ className, ...props }: LabelProps) => {
   return <LabelPrimitive.Root className={labelVariants({ className })} {...props} />;
 };
-Label.displayName = LabelPrimitive.Root.displayName;
 
 export { Label };
