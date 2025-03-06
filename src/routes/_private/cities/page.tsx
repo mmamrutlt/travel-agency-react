@@ -62,13 +62,9 @@ const CitiesPage = () => {
   });
 
   const handleCreateCity = async (data: FormValues) => {
-    try {
-      await createCity.mutateAsync(data);
-      setIsModalOpen(false);
-      form.reset();
-    } catch (error) {
-      console.error('Error creating city:', error);
-    }
+    await createCity.mutateAsync(data);
+    setIsModalOpen(false);
+    form.reset();
   };
 
   if (isLoading) {
@@ -88,7 +84,7 @@ const CitiesPage = () => {
             return setIsModalOpen(true);
           }}
         >
-          Add New City
+          {t('cities.modal.addNewCity')}
         </Button>
       </div>
 

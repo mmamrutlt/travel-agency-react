@@ -63,7 +63,8 @@
     "modal": {
       "title": "Agregar Nueva Ciudad",
       "cancel": "Cancelar",
-      "save": "Guardar Ciudad"
+      "save": "Guardar Ciudad",
+      "addNewCity": "Agregar Nueva Ciudad"
     }
   }
 }
