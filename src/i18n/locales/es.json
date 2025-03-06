@@ -51,5 +51,19 @@
         "previous": "Anterior"
       }
     }
+  },
+  "cities": {
+    "title": "Lista de Ciudades",
+    "name": "Nombre",
+    "country": "País",
+    "population": "Población",
+    "noResults": "No se encontraron ciudades",
+    "loading": "Cargando ciudades...",
+    "error": "Error al cargar las ciudades",
+    "modal": {
+      "title": "Agregar Nueva Ciudad",
+      "cancel": "Cancelar",
+      "save": "Guardar Ciudad"
+    }
   }
 }
