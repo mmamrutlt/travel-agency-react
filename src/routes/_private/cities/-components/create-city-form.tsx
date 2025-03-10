@@ -22,7 +22,7 @@ export const CreateCityForm = ({ form }: CreateCityFormProps) => {
   return (
     <div className="space-y-4">
       <div>
-        <Input {...register('name')} placeholder="Name of the city" />
+        <Input id="name" {...register('name')} placeholder="Name of the city" />
         {errors.name ? <span className="text-sm text-red-500">{errors.name.message}</span> : null}
       </div>
     </div>

@@ -7,47 +7,22 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/ui/modal';
 import { DataTable } from '@/components/ui/table';
-import { createColumnHelper, useTable } from '@/components/ui/table';
 import { paginationValidationWithDefaults, usePagination } from '@/hooks';
 import { useTranslation } from '@/i18n';
 import { useCitiesListQuery, useCreateCityMutation } from '@/services/cities';
-import type { City } from '@/services/cities/types';
 import { CreateCityForm, formSchema, type FormValues } from './-components/create-city-form';
+import { useCitiesTable } from './-hooks/useCityTable';
 
 const CitiesPage = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const columnHelper = createColumnHelper<City>();
 
   const {
     actions: { changePage },
     page,
     pageIndex,
     pageSize,
-  } = usePagination('/_private/cities/');
-
-  const columns = [
-    columnHelper.accessor('id', {
-      header: () => {
-        return t('cities.id');
-      },
-    }),
-    columnHelper.accessor('name', {
-      header: () => {
-        return t('cities.name');
-      },
-    }),
-    columnHelper.accessor('incoming_flights', {
-      header: () => {
-        return t('cities.incoming_flights');
-      },
-    }),
-    columnHelper.accessor('outgoing_flights', {
-      header: () => {
-        return t('cities.outgoing_flights');
-      },
-    }),
-  ];
+  } = usePagination(Route.path);
 
   const {
     data: cities,
@@ -58,9 +33,8 @@ const CitiesPage = () => {
     pageSize,
   });
 
-  const table = useTable({
+  const table = useCitiesTable({
     data: cities?.data ?? [],
-    columns,
     state: { pagination: { pageIndex, pageSize } },
     onPaginationChange: (updater) => {
       if (typeof updater === 'function') {
@@ -75,6 +49,9 @@ const CitiesPage = () => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+    },
   });
 
   const handleCreateCity = async (data: FormValues) => {
@@ -103,9 +80,7 @@ const CitiesPage = () => {
           {t('cities.modal.addNewCity')}
         </Button>
       </div>
-
       <DataTable isLoading={isLoading} table={table} />
-
       <Modal
         cancelText={t('cities.modal.cancel')}
         onOpenChange={(open) => {
@@ -114,9 +89,7 @@ const CitiesPage = () => {
             form.reset();
           }
         }}
-        onSave={() => {
-          return form.handleSubmit(handleCreateCity)();
-        }}
+        onSave={form.handleSubmit(handleCreateCity)}
         open={isModalOpen}
         saveText={t('cities.modal.save')}
         title={t('cities.modal.title')}
