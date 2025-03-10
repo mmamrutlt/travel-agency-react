@@ -22,7 +22,7 @@ const CitiesPage = () => {
     page,
     pageIndex,
     pageSize,
-  } = usePagination(Route.path);
+  } = usePagination('/_private/cities/');
 
   const {
     data: cities,
