@@ -19,6 +19,14 @@
   "buttons": {
     "logOut": "Log out"
   },
+  "navbar": {
+    "home": "Home",
+    "cities": "Cities",
+    "airlines": "Airlines",
+    "flights": "Flights",
+    "logout": "Log out",
+    "logoutConfirm": "Are you sure you want to logout?"
+  },
   "home": {
     "links": {
       "goToPayments": "Go to payments"
