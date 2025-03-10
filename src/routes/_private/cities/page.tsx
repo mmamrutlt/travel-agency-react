@@ -11,24 +11,40 @@ import { createColumnHelper, useTable } from '@/components/ui/table';
 import { paginationValidationWithDefaults, usePagination } from '@/hooks';
 import { useTranslation } from '@/i18n';
 import { useCitiesListQuery, useCreateCityMutation } from '@/services/cities';
+import type { City } from '@/services/cities/types';
 import { CreateCityForm, formSchema, type FormValues } from './-components/create-city-form';
 
 const CitiesPage = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const columnHelper = createColumnHelper<{ name: string }>();
+  const columnHelper = createColumnHelper<City>();
 
   const {
     actions: { changePage },
     page,
     pageIndex,
     pageSize,
-  } = usePagination(Route.id);
+  } = usePagination('/_private/cities/');
 
   const columns = [
+    columnHelper.accessor('id', {
+      header: () => {
+        return t('cities.id');
+      },
+    }),
     columnHelper.accessor('name', {
       header: () => {
         return t('cities.name');
+      },
+    }),
+    columnHelper.accessor('incoming_flights', {
+      header: () => {
+        return t('cities.incoming_flights');
+      },
+    }),
+    columnHelper.accessor('outgoing_flights', {
+      header: () => {
+        return t('cities.outgoing_flights');
       },
     }),
   ];
