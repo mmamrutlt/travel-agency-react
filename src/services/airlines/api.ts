@@ -52,3 +52,8 @@ export const createAirline = async (data: {
     throw error;
   }
 };
+
+export const deleteAirline = async (airlineId: string): Promise<ServiceResponse<void>> => {
+  const response = await privateApi.delete<ServiceResponse<void>>(`airlines/${airlineId}`);
+  return response.data;
+};

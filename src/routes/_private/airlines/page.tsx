@@ -13,6 +13,8 @@ import { useAirlinesListQuery, useCreateAirlineMutation } from '@/services/airli
 import { CreateAirlineForm, formSchema, type FormValues } from './-components/create-airline-form';
 import { useAirlinesTable } from './-hooks/useAirlineTable';
 
+const ROUTE_ID = '/_private/airlines/';
+
 const AirlinesPage = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +24,7 @@ const AirlinesPage = () => {
     page,
     pageIndex,
     pageSize,
-  } = usePagination(Route.id);
+  } = usePagination(ROUTE_ID);
 
   const {
     data: airlines,

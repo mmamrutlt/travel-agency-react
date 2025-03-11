@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { RequestParams, UseQueryProps } from '@/services/types';
-import { createAirline } from './api';
+import { createAirline, deleteAirline } from './api';
 import { queries } from './factories';
 
 export const useAirlinesDetailQuery = (
@@ -23,6 +23,17 @@ export const useCreateAirlineMutation = () => {
 
   return useMutation({
     mutationFn: createAirline,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queries.list._def });
+    },
+  });
+};
+
+export const useDeleteAirlineMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteAirline,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queries.list._def });
     },
