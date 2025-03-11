@@ -63,8 +63,6 @@
   "cities": {
     "title": "Cities List",
     "name": "Name",
-    "country": "Country",
-    "population": "Population",
     "noResults": "No cities found",
     "loading": "Loading cities...",
     "error": "Error loading cities",
@@ -76,6 +74,22 @@
       "cancel": "Cancel",
       "save": "Save City",
       "addNewCity": "Add New City"
+    }
+  },
+  "airlines": {
+    "title": "Airlines List",
+    "noResults": "No airlines found",
+    "loading": "Loading airlines...",
+    "error": "Error loading airlines",
+    "id": "ID",
+    "name": "Name",
+    "description": "Description",
+    "flights_count": "Flights Count",
+    "modal": {
+      "title": "Add New Airline",
+      "cancel": "Cancel",
+      "save": "Save Airline",
+      "addNewAirline": "Add New Airline"
     }
   }
 }
