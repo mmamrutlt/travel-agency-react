@@ -42,6 +42,13 @@ export const createAirline = async (data: {
   name: string;
   description: string;
 }): Promise<ServiceResponse<Airline>> => {
-  const response = await privateApi.post<ServiceResponse<Airline>>('airlines', data);
-  return response.data;
+  try {
+    const response = await privateApi.post<ServiceResponse<Airline>>('airlines', data);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message.includes('422')) {
+      throw new Error('The name has already been taken.');
+    }
+    throw error;
+  }
 };

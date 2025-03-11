@@ -55,9 +55,15 @@ const AirlinesPage = () => {
   });
 
   const handleCreateAirline = async (data: FormValues) => {
-    await createAirline.mutateAsync(data);
-    setIsModalOpen(false);
-    form.reset();
+    try {
+      await createAirline.mutateAsync(data);
+      setIsModalOpen(false);
+      form.reset();
+    } catch (error) {
+      if (error instanceof Error) {
+        form.setError('name', { message: error.message });
+      }
+    }
   };
 
   if (isLoading) {
