@@ -1,36 +1,24 @@
 import { privateApi } from '@/config/api';
-import type { BackendFlight } from '../flights/types';
 import type { RequestParams, ServiceResponse } from '../types';
+import { type CityResponse, citySchema, transformCityData } from './transformCityData';
 import type { City } from './types';
-
-interface BackendCity {
-  id: number;
-  name: string;
-  arrivalFlights: BackendFlight[];
-  departureFlights: BackendFlight[];
-}
-
-const transformCityData = (city: BackendCity): City => {
-  return {
-    id: String(city.id),
-    name: city.name,
-    incoming_flights: city.arrivalFlights.length,
-    outgoing_flights: city.departureFlights.length,
-  };
-};
 
 export const getCitiesList = async ({
   page,
   pageSize,
   searchText,
 }: RequestParams): Promise<ServiceResponse<City[]>> => {
-  const response = await privateApi.get<ServiceResponse<BackendCity[]>>('cities', {
+  const response = await privateApi.get<ServiceResponse<CityResponse[]>>('cities', {
     params: { page, pageSize, searchText },
+  });
+
+  const validatedData = response.data.data.map((city) => {
+    return citySchema.parse(city);
   });
 
   return {
     ...response.data,
-    data: response.data.data.map(transformCityData),
+    data: validatedData.map(transformCityData),
   };
 };
 

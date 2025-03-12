@@ -30,14 +30,15 @@ export const Navbar = () => {
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center">
           <div className="flex items-center space-x-4">
-            {navItems.map((item, index) => {
+            {navItems.map((item) => {
               return (
-                <button
+                <Link
                   className="rounded-md px-3 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-blue-500"
-                  key={index}
+                  key={item.label}
+                  to={item.path}
                 >
-                  <Link to={item.path}>{item.label}</Link>
-                </button>
+                  {item.label}
+                </Link>
               );
             })}
           </div>
