@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as PrivateLayoutImport } from './routes/_private/layout'
 import { Route as PrivatePageImport } from './routes/_private/page'
 import { Route as PrivatePaymentsPageImport } from './routes/_private/payments.page'
+import { Route as PrivateFlightsPageImport } from './routes/_private/flights/page'
 import { Route as PrivateDashboardPageImport } from './routes/_private/dashboard.page'
 import { Route as PrivateCitiesPageImport } from './routes/_private/cities/page'
 import { Route as PrivateAirlinesPageImport } from './routes/_private/airlines/page'
@@ -37,6 +38,12 @@ const PrivatePageRoute = PrivatePageImport.update({
 const PrivatePaymentsPageRoute = PrivatePaymentsPageImport.update({
   id: '/payments/',
   path: '/payments/',
+  getParentRoute: () => PrivateLayoutRoute,
+} as any)
+
+const PrivateFlightsPageRoute = PrivateFlightsPageImport.update({
+  id: '/flights/',
+  path: '/flights/',
   getParentRoute: () => PrivateLayoutRoute,
 } as any)
 
@@ -136,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivateDashboardPageImport
       parentRoute: typeof PrivateLayoutImport
     }
+    '/_private/flights/': {
+      id: '/_private/flights/'
+      path: '/flights'
+      fullPath: '/flights'
+      preLoaderRoute: typeof PrivateFlightsPageImport
+      parentRoute: typeof PrivateLayoutImport
+    }
     '/_private/payments/': {
       id: '/_private/payments/'
       path: '/payments'
@@ -154,6 +168,7 @@ interface PrivateLayoutRouteChildren {
   PrivateAirlinesPageRoute: typeof PrivateAirlinesPageRoute
   PrivateCitiesPageRoute: typeof PrivateCitiesPageRoute
   PrivateDashboardPageRoute: typeof PrivateDashboardPageRoute
+  PrivateFlightsPageRoute: typeof PrivateFlightsPageRoute
   PrivatePaymentsPageRoute: typeof PrivatePaymentsPageRoute
 }
 
@@ -163,6 +178,7 @@ const PrivateLayoutRouteChildren: PrivateLayoutRouteChildren = {
   PrivateAirlinesPageRoute: PrivateAirlinesPageRoute,
   PrivateCitiesPageRoute: PrivateCitiesPageRoute,
   PrivateDashboardPageRoute: PrivateDashboardPageRoute,
+  PrivateFlightsPageRoute: PrivateFlightsPageRoute,
   PrivatePaymentsPageRoute: PrivatePaymentsPageRoute,
 }
 
@@ -179,6 +195,7 @@ export interface FileRoutesByFullPath {
   '/airlines': typeof PrivateAirlinesPageRoute
   '/cities': typeof PrivateCitiesPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
+  '/flights': typeof PrivateFlightsPageRoute
   '/payments': typeof PrivatePaymentsPageRoute
 }
 
@@ -190,6 +207,7 @@ export interface FileRoutesByTo {
   '/airlines': typeof PrivateAirlinesPageRoute
   '/cities': typeof PrivateCitiesPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
+  '/flights': typeof PrivateFlightsPageRoute
   '/payments': typeof PrivatePaymentsPageRoute
 }
 
@@ -203,6 +221,7 @@ export interface FileRoutesById {
   '/_private/airlines/': typeof PrivateAirlinesPageRoute
   '/_private/cities/': typeof PrivateCitiesPageRoute
   '/_private/dashboard/': typeof PrivateDashboardPageRoute
+  '/_private/flights/': typeof PrivateFlightsPageRoute
   '/_private/payments/': typeof PrivatePaymentsPageRoute
 }
 
@@ -217,6 +236,7 @@ export interface FileRouteTypes {
     | '/airlines'
     | '/cities'
     | '/dashboard'
+    | '/flights'
     | '/payments'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -227,6 +247,7 @@ export interface FileRouteTypes {
     | '/airlines'
     | '/cities'
     | '/dashboard'
+    | '/flights'
     | '/payments'
   id:
     | '__root__'
@@ -238,6 +259,7 @@ export interface FileRouteTypes {
     | '/_private/airlines/'
     | '/_private/cities/'
     | '/_private/dashboard/'
+    | '/_private/flights/'
     | '/_private/payments/'
   fileRoutesById: FileRoutesById
 }
@@ -277,6 +299,7 @@ export const routeTree = rootRoute
         "/_private/airlines/",
         "/_private/cities/",
         "/_private/dashboard/",
+        "/_private/flights/",
         "/_private/payments/"
       ]
     },
@@ -304,6 +327,10 @@ export const routeTree = rootRoute
     },
     "/_private/dashboard/": {
       "filePath": "_private/dashboard.page.tsx",
+      "parent": "/_private"
+    },
+    "/_private/flights/": {
+      "filePath": "_private/flights/page.tsx",
       "parent": "/_private"
     },
     "/_private/payments/": {
