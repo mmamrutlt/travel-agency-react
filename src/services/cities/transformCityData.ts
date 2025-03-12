@@ -1,14 +1,6 @@
 import { z } from 'zod';
 
-import type { BackendFlight } from '../flights/types';
 import type { City } from './types';
-
-export interface BackendCity {
-  id: number;
-  name: string;
-  arrivalFlights: BackendFlight[];
-  departureFlights: BackendFlight[];
-}
 
 export const citySchema = z.object({
   id: z.number(),
