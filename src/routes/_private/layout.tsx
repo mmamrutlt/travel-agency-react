@@ -1,15 +1,11 @@
-import { useTranslation } from 'react-i18next';
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 
+import { Navbar } from '@/components/navbar';
 import { getAuthStoreState } from '@/stores';
-
 const PrivateLayout = () => {
-  const { t } = useTranslation();
-
   return (
     <div>
-      {t('greetings.privateLayout')}
-
+      <Navbar />
       <Outlet />
     </div>
   );

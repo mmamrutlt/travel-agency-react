@@ -19,6 +19,14 @@
   "buttons": {
     "logOut": "Log out"
   },
+  "navbar": {
+    "home": "Home",
+    "cities": "Cities",
+    "airlines": "Airlines",
+    "flights": "Flights",
+    "logout": "Log out",
+    "logoutConfirm": "Are you sure you want to logout?"
+  },
   "home": {
     "links": {
       "goToPayments": "Go to payments"
@@ -50,6 +58,24 @@
         "next": "Next",
         "previous": "Previous"
       }
+    }
+  },
+  "cities": {
+    "title": "Cities List",
+    "name": "Name",
+    "country": "Country",
+    "population": "Population",
+    "noResults": "No cities found",
+    "loading": "Loading cities...",
+    "error": "Error loading cities",
+    "incoming_flights": "Incoming Flights",
+    "outgoing_flights": "Outgoing Flights",
+    "id": "ID",
+    "modal": {
+      "title": "Add New City",
+      "cancel": "Cancel",
+      "save": "Save City",
+      "addNewCity": "Add New City"
     }
   }
 }

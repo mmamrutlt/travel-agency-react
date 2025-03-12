@@ -1,4 +1,4 @@
-import { type ComponentProps, type ReactNode } from 'react';
+import { type ComponentProps, forwardRef, type ReactNode } from 'react';
 import { tv } from 'tailwind-variants';
 
 import { IconWrapper } from '@/components/ui/icons';
@@ -38,30 +38,29 @@ interface InputProps extends Omit<ComponentProps<'input'>, 'size'>, Styled {
   size?: Size;
 }
 
-const Input = ({
-  className,
-  containerClassName,
-  left,
-  size = SIZE.MEDIUM,
-  ...props
-}: InputProps) => {
-  return (
-    <div className={container({ className: containerClassName })}>
-      <div className={wrapper()}>
-        {left ? (
-          <IconWrapper className={icon()} size={size}>
-            {left}
-          </IconWrapper>
-        ) : null}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, containerClassName, left, size = SIZE.MEDIUM, ...props }, ref) => {
+    return (
+      <div className={container({ className: containerClassName })}>
+        <div className={wrapper()}>
+          {left ? (
+            <IconWrapper className={icon()} size={size}>
+              {left}
+            </IconWrapper>
+          ) : null}
 
-        <input
-          className={input({ className, size, left: left ? size : undefined })}
-          type="text"
-          {...props}
-        />
+          <input
+            className={input({ className, size, left: left ? size : undefined })}
+            ref={ref}
+            type="text"
+            {...props}
+          />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
+
+Input.displayName = 'Input';
 
 export { Input };
