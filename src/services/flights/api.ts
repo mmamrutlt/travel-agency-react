@@ -1,32 +1,17 @@
 import { privateApi } from '@/config/api';
-import type { BackendFlight } from '../flights/types';
 import type { RequestParams, ServiceResponse } from '../types';
 import type { Flight } from './types';
-
-const transformFlightData = (flight: BackendFlight): Flight => {
-  return {
-    id: String(flight.id),
-    departure_date: flight.departure_date,
-    arrival_date: flight.arrival_date,
-    departure_city_id: String(flight.departure_city_id),
-    arrival_city_id: String(flight.arrival_city_id),
-    airline_id: String(flight.airline_id),
-  };
-};
 
 export const getFlightsList = async ({
   page,
   pageSize,
   searchText,
 }: RequestParams): Promise<ServiceResponse<Flight[]>> => {
-  const response = await privateApi.get<ServiceResponse<BackendFlight[]>>('flights', {
+  const response = await privateApi.get<ServiceResponse<Flight[]>>('flights', {
     params: { page, pageSize, searchText },
   });
 
-  return {
-    ...response.data,
-    data: response.data.data.map(transformFlightData),
-  };
+  return response.data;
 };
 
 export const getFlightDetail = async (flightId: string) => {

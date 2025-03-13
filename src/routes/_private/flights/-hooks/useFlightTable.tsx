@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { format } from 'date-fns';
 
 import { createColumnHelper, useTable, type UseTableProps } from '@/components/ui/table';
 import { useTranslation } from '@/i18n';
@@ -9,7 +10,6 @@ export const useFlightsTable = ({
   ...props
 }: Omit<UseTableProps<Flight>, 'columns'>) => {
   const { t } = useTranslation();
-
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<Flight>();
 
@@ -23,25 +23,33 @@ export const useFlightsTable = ({
         header: () => {
           return t('flights.departure_date');
         },
+        cell: ({ getValue }) => {
+          const date = getValue();
+          return format(new Date(date), 'MMM dd, yyyy - HH:mm');
+        },
       }),
       columnHelper.accessor('arrival_date', {
         header: () => {
           return t('flights.arrival_date');
         },
-      }),
-      columnHelper.accessor('departure_city_id', {
-        header: () => {
-          return t('flights.departure_city_id');
+        cell: ({ getValue }) => {
+          const date = getValue();
+          return format(new Date(date), 'MMM dd, yyyy - HH:mm');
         },
       }),
-      columnHelper.accessor('arrival_city_id', {
+      columnHelper.accessor('departureCity.name', {
         header: () => {
-          return t('flights.arrival_city_id');
+          return t('flights.departure_city');
         },
       }),
-      columnHelper.accessor('airline_id', {
+      columnHelper.accessor('arrivalCity.name', {
         header: () => {
-          return t('flights.airline_id');
+          return t('flights.arrival_city');
+        },
+      }),
+      columnHelper.accessor('airline.name', {
+        header: () => {
+          return t('flights.airline');
         },
       }),
     ];

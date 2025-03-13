@@ -103,9 +103,9 @@
     "id": "ID",
     "departure_date": "Departure Date",
     "arrival_date": "Arrival Date",
-    "departure_city_id": "Departure City ID",
-    "arrival_city_id": "Arrival City ID",
-    "airline_id": "Airline ID",
+    "departure_city": "Departure City",
+    "arrival_city": "Arrival City",
+    "airline": "Airline",
     "title": "Flights List",
     "modal": {
       "title": "Add New Flight",

@@ -59,7 +59,7 @@ const FlightsPage = () => {
     },
   });
 
-  const handleCreateCity = async (data: FormValues) => {
+  const handleCreateFlight = async (data: FormValues) => {
     await createFlight.mutateAsync(data);
     setIsModalOpen(false);
     form.reset();
@@ -94,7 +94,7 @@ const FlightsPage = () => {
             form.reset();
           }
         }}
-        onSave={form.handleSubmit(handleCreateCity)}
+        onSave={form.handleSubmit(handleCreateFlight)}
         open={isModalOpen}
         saveText={t('flights.modal.save')}
         title={t('flights.modal.title')}
