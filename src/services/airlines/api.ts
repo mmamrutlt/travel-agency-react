@@ -18,6 +18,19 @@ export const getAirlinesList = async ({
   };
 };
 
+export const getDropdownAirlinesList = async (): Promise<ServiceResponse<Airline[]>> => {
+  const response = await privateApi.get<ServiceResponse<AirlineResponse[]>>('airlines/dropdown');
+  return {
+    ...response.data,
+    data: response.data.data.map((airline) => {
+      return {
+        ...airline,
+        id: String(airline.id),
+      };
+    }),
+  };
+};
+
 export const getAirlineDetail = async (airlineId: string) => {
   return privateApi.get<ServiceResponse<Airline>>(`airlines/${airlineId}`);
 };

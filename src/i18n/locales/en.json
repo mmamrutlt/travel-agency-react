@@ -111,7 +111,15 @@
       "title": "Add New Flight",
       "cancel": "Cancel",
       "save": "Save Flight",
-      "addNewFlight": "Add New Flight"
+      "addNewFlight": "Add New Flight",
+      "departure_date": "Departure Date",
+      "arrival_date": "Arrival Date",
+      "airline": "Airline",
+      "select_airline": "Select Airline",
+      "departure_city": "Departure City",
+      "select_departure_city": "Select Departure City",
+      "arrival_city": "Arrival City",
+      "select_arrival_city": "Select Arrival City"
     }
   }
 }

@@ -18,6 +18,10 @@ export const useCitiesListQuery = (
   return useQuery({ ...queries.list(params), ...props });
 };
 
+export const useDropdownCitiesListQuery = (props?: UseQueryProps<typeof queries.dropdown>) => {
+  return useQuery({ ...queries.dropdown(), ...props });
+};
+
 export const useCreateCityMutation = () => {
   const queryClient = useQueryClient();
 

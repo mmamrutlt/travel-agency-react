@@ -2,7 +2,7 @@ import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { skipToken } from '@tanstack/react-query';
 
 import type { RequestParams } from '../types';
-import { getAirlineDetail, getAirlinesList } from './api';
+import { getAirlineDetail, getAirlinesList, getDropdownAirlinesList } from './api';
 
 export const queries = createQueryKeys('airlines', {
   detail: (airlineId: string) => {
@@ -18,6 +18,14 @@ export const queries = createQueryKeys('airlines', {
       queryKey: [params],
       queryFn: () => {
         return getAirlinesList(params);
+      },
+    };
+  },
+  dropdown: () => {
+    return {
+      queryKey: ['dropdownAirlines'],
+      queryFn: () => {
+        return getDropdownAirlinesList();
       },
     };
   },
