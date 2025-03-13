@@ -16,6 +16,7 @@ import { Route as PrivatePageImport } from './routes/_private/page'
 import { Route as PrivatePaymentsPageImport } from './routes/_private/payments.page'
 import { Route as PrivateDashboardPageImport } from './routes/_private/dashboard.page'
 import { Route as PrivateCitiesPageImport } from './routes/_private/cities/page'
+import { Route as PrivateAirlinesPageImport } from './routes/_private/airlines/page'
 import { Route as PrivateAdminPageImport } from './routes/_private/admin.page'
 import { Route as publicRegisterPageImport } from './routes/(public)/register.page'
 import { Route as publicLoginPageImport } from './routes/(public)/login/page'
@@ -48,6 +49,12 @@ const PrivateDashboardPageRoute = PrivateDashboardPageImport.update({
 const PrivateCitiesPageRoute = PrivateCitiesPageImport.update({
   id: '/cities/',
   path: '/cities/',
+  getParentRoute: () => PrivateLayoutRoute,
+} as any)
+
+const PrivateAirlinesPageRoute = PrivateAirlinesPageImport.update({
+  id: '/airlines/',
+  path: '/airlines/',
   getParentRoute: () => PrivateLayoutRoute,
 } as any)
 
@@ -108,6 +115,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivateAdminPageImport
       parentRoute: typeof PrivateLayoutImport
     }
+    '/_private/airlines/': {
+      id: '/_private/airlines/'
+      path: '/airlines'
+      fullPath: '/airlines'
+      preLoaderRoute: typeof PrivateAirlinesPageImport
+      parentRoute: typeof PrivateLayoutImport
+    }
     '/_private/cities/': {
       id: '/_private/cities/'
       path: '/cities'
@@ -137,6 +151,7 @@ declare module '@tanstack/react-router' {
 interface PrivateLayoutRouteChildren {
   PrivatePageRoute: typeof PrivatePageRoute
   PrivateAdminPageRoute: typeof PrivateAdminPageRoute
+  PrivateAirlinesPageRoute: typeof PrivateAirlinesPageRoute
   PrivateCitiesPageRoute: typeof PrivateCitiesPageRoute
   PrivateDashboardPageRoute: typeof PrivateDashboardPageRoute
   PrivatePaymentsPageRoute: typeof PrivatePaymentsPageRoute
@@ -145,6 +160,7 @@ interface PrivateLayoutRouteChildren {
 const PrivateLayoutRouteChildren: PrivateLayoutRouteChildren = {
   PrivatePageRoute: PrivatePageRoute,
   PrivateAdminPageRoute: PrivateAdminPageRoute,
+  PrivateAirlinesPageRoute: PrivateAirlinesPageRoute,
   PrivateCitiesPageRoute: PrivateCitiesPageRoute,
   PrivateDashboardPageRoute: PrivateDashboardPageRoute,
   PrivatePaymentsPageRoute: PrivatePaymentsPageRoute,
@@ -160,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof publicLoginPageRoute
   '/register': typeof publicRegisterPageRoute
   '/admin': typeof PrivateAdminPageRoute
+  '/airlines': typeof PrivateAirlinesPageRoute
   '/cities': typeof PrivateCitiesPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
   '/payments': typeof PrivatePaymentsPageRoute
@@ -170,6 +187,7 @@ export interface FileRoutesByTo {
   '/login': typeof publicLoginPageRoute
   '/register': typeof publicRegisterPageRoute
   '/admin': typeof PrivateAdminPageRoute
+  '/airlines': typeof PrivateAirlinesPageRoute
   '/cities': typeof PrivateCitiesPageRoute
   '/dashboard': typeof PrivateDashboardPageRoute
   '/payments': typeof PrivatePaymentsPageRoute
@@ -182,6 +200,7 @@ export interface FileRoutesById {
   '/(public)/login/': typeof publicLoginPageRoute
   '/(public)/register/': typeof publicRegisterPageRoute
   '/_private/admin/': typeof PrivateAdminPageRoute
+  '/_private/airlines/': typeof PrivateAirlinesPageRoute
   '/_private/cities/': typeof PrivateCitiesPageRoute
   '/_private/dashboard/': typeof PrivateDashboardPageRoute
   '/_private/payments/': typeof PrivatePaymentsPageRoute
@@ -195,6 +214,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin'
+    | '/airlines'
     | '/cities'
     | '/dashboard'
     | '/payments'
@@ -204,6 +224,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin'
+    | '/airlines'
     | '/cities'
     | '/dashboard'
     | '/payments'
@@ -214,6 +235,7 @@ export interface FileRouteTypes {
     | '/(public)/login/'
     | '/(public)/register/'
     | '/_private/admin/'
+    | '/_private/airlines/'
     | '/_private/cities/'
     | '/_private/dashboard/'
     | '/_private/payments/'
@@ -252,6 +274,7 @@ export const routeTree = rootRoute
       "children": [
         "/_private/",
         "/_private/admin/",
+        "/_private/airlines/",
         "/_private/cities/",
         "/_private/dashboard/",
         "/_private/payments/"
@@ -269,6 +292,10 @@ export const routeTree = rootRoute
     },
     "/_private/admin/": {
       "filePath": "_private/admin.page.tsx",
+      "parent": "/_private"
+    },
+    "/_private/airlines/": {
+      "filePath": "_private/airlines/page.tsx",
       "parent": "/_private"
     },
     "/_private/cities/": {
