@@ -2,7 +2,7 @@ import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { skipToken } from '@tanstack/react-query';
 
 import type { RequestParams } from '../types';
-import { getCitiesList, getCityDetail } from './api';
+import { getCitiesList, getCityDetail, getDropdownCitiesList } from './api';
 
 export const queries = createQueryKeys('cities', {
   detail: (cityId: string) => {
@@ -18,6 +18,14 @@ export const queries = createQueryKeys('cities', {
       queryKey: [params],
       queryFn: () => {
         return getCitiesList(params);
+      },
+    };
+  },
+  dropdown: () => {
+    return {
+      queryKey: ['dropdownCities'],
+      queryFn: () => {
+        return getDropdownCitiesList();
       },
     };
   },

@@ -18,6 +18,10 @@ export const useAirlinesListQuery = (
   return useQuery({ ...queries.list(params), ...props });
 };
 
+export const useDropdownAirlinesListQuery = (props?: UseQueryProps<typeof queries.dropdown>) => {
+  return useQuery({ ...queries.dropdown(), ...props });
+};
+
 export const useCreateAirlineMutation = () => {
   const queryClient = useQueryClient();
 

@@ -22,6 +22,19 @@ export const getCitiesList = async ({
   };
 };
 
+export const getDropdownCitiesList = async (): Promise<ServiceResponse<City[]>> => {
+  const response = await privateApi.get<ServiceResponse<CityResponse[]>>('cities/dropdown');
+  return {
+    ...response.data,
+    data: response.data.data.map((city) => {
+      return {
+        ...city,
+        id: String(city.id),
+      };
+    }),
+  };
+};
+
 export const getCityDetail = async (cityId: string) => {
   return privateApi.get<ServiceResponse<City>>(`cities/${cityId}`);
 };

@@ -94,6 +94,32 @@
     }
   },
   "common": {
-    "delete": "Delete"
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "Error"
+  },
+  "flights": {
+    "id": "ID",
+    "departure_date": "Departure Date",
+    "arrival_date": "Arrival Date",
+    "departure_city": "Departure City",
+    "arrival_city": "Arrival City",
+    "airline": "Airline",
+    "title": "Flights List",
+    "modal": {
+      "title": "Add New Flight",
+      "cancel": "Cancel",
+      "save": "Save Flight",
+      "addNewFlight": "Add New Flight",
+      "departure_date": "Departure Date",
+      "arrival_date": "Arrival Date",
+      "airline": "Airline",
+      "select_airline": "Select Airline",
+      "departure_city": "Departure City",
+      "select_departure_city": "Select Departure City",
+      "arrival_city": "Arrival City",
+      "select_arrival_city": "Select Arrival City"
+    }
   }
 }

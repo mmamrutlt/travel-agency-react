@@ -1,32 +1,39 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { RequestParams, UseQueryProps } from '@/services/types';
-import { createCity } from './api';
+import { createFlight, deleteFlight } from './api';
 import { queries } from './factories';
 
-export const useCitiesDetailQuery = (
-  cityId: string,
+export const useFlightsDetailQuery = (
+  flightId: string,
   props?: UseQueryProps<typeof queries.detail>,
 ) => {
-  return useQuery({ ...queries.detail(cityId), ...props });
+  return useQuery({ ...queries.detail(flightId), ...props });
 };
 
-export const useCitiesListQuery = (
+export const useFlightsListQuery = (
   params: RequestParams,
   props?: UseQueryProps<typeof queries.list>,
 ) => {
   return useQuery({ ...queries.list(params), ...props });
 };
 
-export const useDropdownCitiesListQuery = (props?: UseQueryProps<typeof queries.dropdown>) => {
-  return useQuery({ ...queries.dropdown(), ...props });
-};
-
-export const useCreateCityMutation = () => {
+export const useCreateFlightMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: createCity,
+    mutationFn: createFlight,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queries.list._def });
+    },
+  });
+};
+
+export const useDeleteFlightMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteFlight,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queries.list._def });
     },
